@@ -1,22 +1,30 @@
 package com.example.SkinCare.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class User {
-
     @Id
-    private Long id; // 유저의 고유 ID
-
-    private String username; // 유저 이름
-    private String password; // 유저 비밀번호
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String username;
+    private String password;
+    private String email;
 
     // 기본 생성자
-    public User() {
+    public User() {}
+
+    // 생성자
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
     }
 
-    // getters and setters
+    // Getter & Setter
     public Long getId() {
         return id;
     }
@@ -39,5 +47,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

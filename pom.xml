@@ -14,85 +14,76 @@
 	<name>project</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
-<licenses>
-    <license>
-        <name>MIT License</name>
-        <url>https://opensource.org/licenses/MIT</url>
-        <distribution>repo</distribution>
-    </license>
-</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
+	<licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+        <!-- Spring Boot Starter Data JPA: JPA와 Hibernate 관련 의존성 포함 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 
-	<dependency>
-    <groupId>jakarta.persistence</groupId>
-    <artifactId>jakarta.persistence-api</artifactId>
-    <version>3.1.0</version> <!-- 최신 버전 -->
-</dependency>
+        <!-- Spring Boot Starter Security: 인증 및 권한 관리 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 
-<dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-core</artifactId>
-    <version>6.6.11.Final</version> <!-- 최신 버전 확인 -->
-</dependency>
+        <!-- Spring Boot Starter Thymeleaf: Thymeleaf 템플릿 엔진 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-security</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-thymeleaf</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.thymeleaf.extras</groupId>
-        <artifactId>thymeleaf-extras-springsecurity6</artifactId>
-    </dependency>
-    <!-- MySQL Connector/J with version -->
-<dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <version>8.0.25</version> <!-- 버전 변경 -->
-</dependency>
+        <!-- Spring Boot Starter Web: RESTful 웹 서비스 및 MVC 지원 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 
+        <!-- Thymeleaf extras for Spring Security -->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
+		</dependency>
 
+        <!-- MySQL Connector/J -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.25</version>
+		</dependency>
 
-    <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <optional>provided</optional>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.security</groupId>
-        <artifactId>spring-security-test</artifactId>
-        <scope>test</scope>
-    </dependency>
-</dependencies>
+        <!-- Lombok: 코드에서 보일러플레이트 제거 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.24</version>
+			<scope>provided</scope>
+		</dependency>
 
+        <!-- Spring Boot Starter Test: 단위 테스트를 위한 의존성 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+        <!-- Spring Security Test: Spring Security 관련 테스트 -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -111,16 +102,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
