@@ -31,6 +31,13 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
+		<dependency>
+    <groupId>org.hibernate.validator</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    <version>8.0.2.Final</version> <!-- 최신 버전으로 변경할 수 있습니다 -->
+</dependency>
+
+
         <!-- Spring Boot Starter Security: 인증 및 권한 관리 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -48,6 +55,17 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		    <!-- BCryptPasswordEncoder 의존성 추가 -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId>
+		</dependency>
+
+		 <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-web</artifactId>
+    	</dependency>
 
         <!-- Thymeleaf extras for Spring Security -->
 		<dependency>
@@ -83,7 +101,16 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+
+	
+ </dependencies>
 
 	<build>
 		<plugins>
@@ -100,9 +127,11 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+    <version>3.0.0</version> <!-- 적절한 버전으로 설정 -->
+</plugin>
+
 		</plugins>
 	</build>
 </project>

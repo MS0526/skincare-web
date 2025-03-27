@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}"></title>
+</head>
+<body>
+    <!-- 로그인 상태에 따른 메시지 표시 -->
+    <h1>Welcome, <span th:text="${username}"></span>!</h1>
+
+    <p>로그인 상태: 
+        <span th:text="${username} == 'Guest' ? 'Not logged in' : 'Logged in'"></span>
+    </p>
+
+    <div>
+        <!-- 로그인 상태에 따른 링크 표시 -->
+        <a th:href="${username == 'Guest' ? '/login' : '/logout'}" th:text="${username == 'Guest' ? 'Login' : 'Logout'}"></a>
+    </div>
+
+    <div>
+        <!-- 회원가입 링크 (로그인 하지 않은 상태에서만 보이도록) -->
+        <a th:href="${username == 'Guest' ? '/register' : '#'}" th:text="${username == 'Guest' ? 'Sign Up' : ''}"></a>
+    </div>
+</body>
+</html>
