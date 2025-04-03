@@ -2,6 +2,7 @@ package com.example.SkinCare.controller;
 
 import com.example.SkinCare.model.User;
 import com.example.SkinCare.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder; // 🔐 추가
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,32 +11,38 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder; // 🔐 추가
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/login")
     public String loginPage() {
-        return "login"; // 로그인 페이지로 이동
+        return "login";
     }
 
     @GetMapping("/register")
     public String registerPage() {
-        return "register"; // 회원가입 페이지로 이동
+        return "register";
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, Model model) {
-        // 로그인 처리 후 인덱스로 리다이렉트
-        model.addAttribute("username", username);
-        return "redirect:/"; // 로그인 후 인덱스 페이지로 리다이렉트
-    }
+    public String login(@RequestParam String username,
+            @RequestParam String password,
+            Model model) {
 
-    @PostMapping("/register")
-    public String registerUser(@ModelAttribute User user, Model model) {
-        userService.saveUser(user); // 사용자 저장
-        model.addAttribute("message", "회원가입이 완료되었습니다. 로그인하세요.");
-        return "register_success"; // 회원가입 성공 페이지로 이동
+        User user = userService.getUserByUsername(username);
+
+        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+            // 로그인 성공
+            model.addAttribute("username", user.getUsername());
+            return "redirect:/home";
+        } else {
+            // 로그인 실패
+            model.addAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
+            return "login";
+        }
     }
 }

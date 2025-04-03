@@ -19,21 +19,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/", "/login", "/register").permitAll() // 로그인, 회원가입 페이지는 누구나 접근 가능
-                        .anyRequest().authenticated() // 그 외 페이지는 로그인한 사용자만 접근 가능
-                )
+        return http
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/login", "/register", "/user/register").permitAll()
+                        .anyRequest().authenticated())
                 .formLogin(form -> form
-                        .loginPage("/login") // 커스터마이징된 로그인 페이지로 이동
-                        .defaultSuccessUrl("/home", true) // 로그인 성공 후 홈 페이지로 이동
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/home", true)
                         .permitAll())
-
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/index")
-                        .permitAll());
-
-        return http.build();
+                        .permitAll())
+                .csrf(csrf -> csrf.disable()) // ✅ 최신 방식으로 CSRF 비활성화
+                .build();
     }
 }
