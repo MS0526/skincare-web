@@ -21,17 +21,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login", "/register", "/user/register").permitAll()
+                        .requestMatchers("/", "/login", "/register", "/user/register", "/doLogin", "/home").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/home", true)
+                        .loginPage("/login") // 로그인 페이지 커스터마이징만 설정
                         .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/index")
                         .permitAll())
-                .csrf(csrf -> csrf.disable()) // ✅ 최신 방식으로 CSRF 비활성화
+                .csrf(csrf -> csrf.disable())
                 .build();
     }
 }

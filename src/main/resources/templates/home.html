@@ -5,6 +5,15 @@
 </head>
 <body>
     <h2>환영합니다!</h2>
-    <p>로그인에 성공하셨습니다.</p>
+
+    <p>
+        <span th:if="${username}">
+            로그인한 사용자: <strong th:text="${username}">유저이름</strong>
+        </span>
+    </p>
+
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">로그아웃</button>
+    </form>
 </body>
 </html>

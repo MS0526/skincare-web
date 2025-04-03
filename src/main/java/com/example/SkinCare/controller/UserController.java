@@ -37,7 +37,10 @@ public class UserController {
         String encodedPassword = passwordEncoder.encode(rawPassword);
         user.setPassword(encodedPassword);
 
+        // ✅ 기본 역할 설정
         user.setRole("USER");
+
+        // 💾 사용자 저장
         userService.saveUser(user);
 
         System.out.println("회원가입 저장 완료");
