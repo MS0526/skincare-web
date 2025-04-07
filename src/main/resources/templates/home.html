@@ -4,13 +4,17 @@
     <title>홈</title>
 </head>
 <body>
+    <div th:replace="fragments/nav :: nav"></div>
+    <!-- ✅ 네비게이션 삽입 -->
     <h2>환영합니다!</h2>
 
     <p>
         <span th:if="${username}">
             로그인한 사용자: <strong th:text="${username}">유저이름</strong>
         </span>
+        <a href="/mypage">마이페이지</a>
     </p>
+
 
     <form th:action="@{/logout}" method="post">
         <button type="submit">로그아웃</button>

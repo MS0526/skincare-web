@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>회원 목록</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <!-- 공통 네비게이션 바 삽입 -->
+    <div th:replace="~{fragments/nav :: *}"></div>
+
+
+    <h2>회원 목록</h2>
+
+    <table border="1" cellspacing="0" cellpadding="8">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>아이디</th>
+                <th>권한</th>
+                <th>삭제</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}">1</td>
+                <td th:text="${user.username}">user</td>
+                <td th:text="${user.role}">USER</td>
+                <td>
+                    <!-- 자기 자신은 삭제 버튼 비활성화 -->
+                    <form th:action="@{'/admin/users/delete/' + ${user.id}}" method="post">
+                        <button type="submit"
+                                th:disabled="${user.id == loginUserId}">삭제</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <a href="/admin">관리자 홈</a>
+</body>
+</html>

@@ -12,25 +12,25 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login", "/register", "/user/register", "/doLogin", "/home").permitAll()
-                        .anyRequest().authenticated())
-                .formLogin(form -> form
-                        .loginPage("/login") // 로그인 페이지 커스터마이징만 설정
-                        .permitAll())
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/index")
-                        .permitAll())
-                .csrf(csrf -> csrf.disable())
-                .build();
-    }
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                return http
+                                .authorizeHttpRequests(auth -> auth
+                                                .requestMatchers("/", "/login", "/register", "/user/register",
+                                                                "/doLogin", "/home", "/mypage")
+                                                .permitAll()
+                                                .anyRequest().authenticated())
+
+                                .logout(logout -> logout
+                                                .logoutUrl("/logout")
+                                                .logoutSuccessUrl("/index")
+                                                .permitAll())
+                                .csrf(csrf -> csrf.disable())
+                                .build();
+        }
 }
