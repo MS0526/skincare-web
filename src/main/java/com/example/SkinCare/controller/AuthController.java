@@ -1,3 +1,4 @@
+// ✅ AuthController.java
 package com.example.SkinCare.controller;
 
 import com.example.SkinCare.model.User;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class AuthController {
 
-    private final UserService userService; // ✅ 선언 누락되었던 부분
+    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
     public AuthController(UserService userService, PasswordEncoder passwordEncoder) {
@@ -35,11 +36,8 @@ public class AuthController {
     @GetMapping("/home")
     public String homePage(HttpSession session, Model model) {
         User loginUser = (User) session.getAttribute("loginUser");
-
-        if (loginUser == null) {
+        if (loginUser == null)
             return "redirect:/login";
-        }
-
         model.addAttribute("username", loginUser.getUsername());
         return "home";
     }
@@ -47,15 +45,10 @@ public class AuthController {
     @GetMapping("/mypage")
     public String mypage(HttpSession session, Model model) {
         User loginUser = (User) session.getAttribute("loginUser");
-
-        if (loginUser == null) {
+        if (loginUser == null)
             return "redirect:/login";
-        }
-
-        if (!"USER".equals(loginUser.getRole())) {
+        if (!"USER".equals(loginUser.getRole()))
             return "redirect:/home";
-        }
-
         model.addAttribute("username", loginUser.getUsername());
         return "mypage";
     }
@@ -63,16 +56,12 @@ public class AuthController {
     @GetMapping("/admin")
     public String adminPage(HttpSession session, Model model, HttpServletResponse response) {
         User loginUser = (User) session.getAttribute("loginUser");
-
-        if (loginUser == null) {
+        if (loginUser == null)
             return "redirect:/login";
-        }
-
         if (!"ADMIN".equals(loginUser.getRole())) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return "error/403";
         }
-
         model.addAttribute("username", loginUser.getUsername());
         return "admin";
     }
@@ -80,15 +69,10 @@ public class AuthController {
     @GetMapping("/admin/users")
     public String userList(HttpSession session, Model model) {
         User loginUser = (User) session.getAttribute("loginUser");
-
-        if (loginUser == null) {
+        if (loginUser == null)
             return "redirect:/login";
-        }
-
-        if (!"ADMIN".equals(loginUser.getRole())) {
+        if (!"ADMIN".equals(loginUser.getRole()))
             return "error/403";
-        }
-
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("loginUserId", loginUser.getId());
         return "admin_user_list";
@@ -99,12 +83,10 @@ public class AuthController {
             @RequestParam String password,
             Model model,
             HttpSession session) {
-
         User user = userService.getUserByUsername(username);
-
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
             session.setAttribute("loginUser", user);
-            return "redirect:/home";
+            return "redirect:" + ("ADMIN".equals(user.getRole()) ? "/admin" : "/home");
         } else {
             model.addAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
             return "login";
@@ -114,15 +96,10 @@ public class AuthController {
     @PostMapping("/admin/users/delete/{id}")
     public String deleteUser(@PathVariable Long id, HttpSession session) {
         User loginUser = (User) session.getAttribute("loginUser");
-
-        if (loginUser == null || !"ADMIN".equals(loginUser.getRole())) {
+        if (loginUser == null || !"ADMIN".equals(loginUser.getRole()))
             return "error/403";
-        }
-
-        if (!loginUser.getId().equals(id)) {
+        if (!loginUser.getId().equals(id))
             userService.deleteUserById(id);
-        }
-
         return "redirect:/admin/users";
     }
 }

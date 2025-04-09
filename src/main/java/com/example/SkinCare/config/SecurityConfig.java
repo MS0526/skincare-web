@@ -1,3 +1,4 @@
+// ✅ SecurityConfig.java
 package com.example.SkinCare.config;
 
 import org.springframework.context.annotation.Bean;
@@ -24,8 +25,9 @@ public class SecurityConfig {
                                                 .requestMatchers("/", "/login", "/register", "/user/register",
                                                                 "/doLogin", "/home", "/mypage")
                                                 .permitAll()
-                                                .anyRequest().authenticated())
-
+                                                .anyRequest().permitAll() // 권한 체크는 컨트롤러에서 함
+                                )
+                                .formLogin(form -> form.disable())
                                 .logout(logout -> logout
                                                 .logoutUrl("/logout")
                                                 .logoutSuccessUrl("/home")
