@@ -6,7 +6,7 @@
     <title th:text="${title}"></title>
 </head>
 <body>
-    <div th:replace="fragments/nav :: nav"></div> <!-- ✅ 네비게이션 삽입 -->
+    <div th:replace="~{fragments/nav :: nav}"></div> <!-- ✅ 네비게이션 삽입 -->
     <!-- 로그인 상태에 따른 메시지 표시 -->
     <h1>Welcome, <span th:text="${username}"></span>!</h1>
 

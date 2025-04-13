@@ -1,0 +1,36 @@
+<!-- src/main/resources/templates/routine_list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>나의 루틴</title>
+</head>
+<body>
+    <div th:replace="~{fragments/nav :: nav}"></div>
+
+    <h2>🧼 나의 피부 루틴</h2>
+
+    <form action="/routine/add" method="post">
+        <label for="timeOfDay">시간:</label>
+        <select name="timeOfDay">
+            <option value="아침">아침</option>
+            <option value="저녁">저녁</option>
+        </select>
+        <br><br>
+        <label for="content">루틴 내용:</label>
+        <input type="text" name="content" required>
+        <br><br>
+        <button type="submit">추가</button>
+    </form>
+
+    <h3>내 루틴 목록</h3>
+    <ul>
+        <li th:each="routine : ${routines}">
+            <span th:text="${routine.timeOfDay}">아침</span> - 
+            <span th:text="${routine.content}">클렌징폼</span>
+            <form th:action="@{'/routine/delete/' + ${routine.id}}" method="post" style="display:inline;">
+                <button type="submit">삭제</button>
+            </form>
+        </li>
+    </ul>
+</body>
+</html>

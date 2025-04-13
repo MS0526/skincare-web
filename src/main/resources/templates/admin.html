@@ -4,8 +4,7 @@
     <title>관리자 페이지</title>
 </head>
 <body>
-    <div th:replace="fragments/nav :: nav"></div>
- <!-- ✅ 네비게이션 삽입 -->
+    <div th:replace="~{fragments/nav :: nav}"></div> <!-- ✅ 네비게이션 삽입 -->
     <h2>👑 관리자 페이지</h2>
     <p>환영합니다, <strong th:text="${username}">관리자</strong>님!</p>
     <a th:href="@{/admin/users}">회원 목록 관리</a>
