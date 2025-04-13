@@ -1,0 +1,25 @@
+<!-- src/main/resources/templates/skin_recommend.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>스킨케어 추천</title>
+</head>
+<body>
+    <div th:replace="fragments/nav :: nav"></div>
+
+    <h2>🔍 맞춤형 스킨케어 추천</h2>
+    
+    <div th:if="${skinType}">
+        <p>당신의 피부 타입은 <strong th:text="${skinType}">건성</strong>입니다.</p>
+
+        <h3>추천 제품</h3>
+        <ul>
+            <li th:each="item : ${recommendList}" th:text="${item}"></li>
+        </ul>
+    </div>
+
+    <div th:if="${skinType == null}">
+        <p>먼저 <a href="/skin/diagnosis">피부 타입 진단</a>을 진행해주세요.</p>
+    </div>
+</body>
+</html>

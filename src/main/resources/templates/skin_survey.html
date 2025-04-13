@@ -1,0 +1,28 @@
+<!-- src/main/resources/templates/skin_survey.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>피부 타입 설문</title>
+</head>
+<body>
+    <h2>피부 타입 설문</h2>
+    <form action="/skin/diagnosis" method="post">
+        <p>세안 후 피부 상태는 어떤가요?</p>
+        <label><input type="radio" name="q1" value="dry"> 당김이 심하다</label><br>
+        <label><input type="radio" name="q1" value="oily"> 유분기가 많이 느껴진다</label><br>
+        <label><input type="radio" name="q1" value="normal"> 보통이다</label><br>
+
+        <p>T존(이마, 코) 부위는 어떤가요?</p>
+        <label><input type="radio" name="q2" value="oily"> 번들거린다</label><br>
+        <label><input type="radio" name="q2" value="dry"> 건조하다</label><br>
+        <label><input type="radio" name="q2" value="normal"> 보통이다</label><br>
+
+        <p>피부 트러블 빈도는?</p>
+        <label><input type="radio" name="q3" value="sensitive"> 자주 올라온다</label><br>
+        <label><input type="radio" name="q3" value="normal"> 거의 없다</label><br>
+
+        <br>
+        <button type="submit">제출</button>
+    </form>
+</body>
+</html>
