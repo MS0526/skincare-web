@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>성분 검색</title>
+</head>
+<body>
+    <div th:replace="fragments/nav :: nav"></div>
+
+    <h2>🔍 성분 검색</h2>
+    <form action="/ingredient/search" method="post">
+        <label for="name">성분 이름:</label>
+        <input type="text" id="name" name="name" required>
+        <button type="submit">검색</button>
+    </form>
+</body>
+</html>
