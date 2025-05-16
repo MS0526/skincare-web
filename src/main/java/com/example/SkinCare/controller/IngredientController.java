@@ -1,9 +1,12 @@
 package com.example.SkinCare.controller;
 
+import com.example.SkinCare.model.Ingredient;
 import com.example.SkinCare.service.IngredientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/ingredient")
@@ -22,12 +25,14 @@ public class IngredientController {
 
     @PostMapping("/search")
     public String searchResult(@RequestParam String name, Model model) {
-        var result = ingredientService.searchByName(name);
-        if (result.isPresent()) {
-            model.addAttribute("ingredient", result.get());
-        } else {
+        List<Ingredient> results = ingredientService.searchByNameLike(name);
+
+        if (results.isEmpty()) {
             model.addAttribute("error", "해당 성분을 찾을 수 없습니다.");
+        } else {
+            model.addAttribute("results", results); // 여러 개 가능성
         }
-        return "ingredient_result";
+
+        return "ingredient_results"; // 복수 결과 템플릿
     }
 }
