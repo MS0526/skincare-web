@@ -1,5 +1,36 @@
 <!-- src/main/resources/templates/fragments/nav.html -->
 <nav th:fragment="nav">
+    <style>
+        nav {
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 20px;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        nav li {
+            display: inline;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #007BFF;
+        }
+        @media (max-width: 600px) {
+            nav ul {
+                flex-direction: column;
+            }
+        }
+    </style>
     <ul>
         <li><a th:href="@{/}">홈</a></li>
         <li><a th:href="@{/login}">로그인</a></li>
@@ -8,8 +39,7 @@
         <li><a th:href="@{/skin/diagnosis}">피부 진단</a></li>
         <li><a th:href="@{/skin/recommend}">제품 추천</a></li>
         <li><a th:href="@{/routine}">나의 루틴</a></li>
-
-
-
+        <li><a th:href="@{/ingredient/search}">성분 검색</a></li>
+        <li><a th:href="@{/ingredient/ocr}">성분 분석</a></li>
     </ul>
 </nav>

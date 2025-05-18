@@ -24,4 +24,18 @@ public class IngredientService {
         return ingredientRepository.findByNameContainingIgnoreCase(keyword);
     }
 
+    public List<Ingredient> findByNames(List<String> names) {
+        System.out.println("🔍 검색할 성분 키워드: " + names);
+        List<Ingredient> found = ingredientRepository.findByNameIn(names);
+        System.out.println("✅ 매칭된 성분 개수: " + found.size());
+        return found;
+    }
+
+    public List<Ingredient> findByKeywordPartialMatch(List<String> keywords) {
+        List<Ingredient> all = ingredientRepository.findAll();
+        return all.stream()
+                .filter(ing -> keywords.stream().anyMatch(k -> ing.getName().equalsIgnoreCase(k)))
+                .toList();
+    }
+
 }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>OCR 분석 결과</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .error { color: red; }
+        table { border-collapse: collapse; width: 100%; margin-top: 1em; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+
+<!-- ✅ Thymeleaf 최신 문법 -->
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<h2>📑 OCR 분석 결과</h2>
+
+<!-- ❌ 오류 메시지 -->
+<div th:if="${error}">
+    <p class="error" th:text="${error}"></p>
+</div>
+
+<!-- 📄 추출된 텍스트 -->
+<div th:if="${extractedText}">
+    <p><strong>추출된 원문:</strong></p>
+    <pre th:text="${extractedText}"></pre>
+</div>
+
+<!-- 🔍 성분 매칭 결과 -->
+<h3>🔬 매칭된 성분 목록</h3>
+
+<div th:if="${matchedIngredients != null and #lists.isEmpty(matchedIngredients)}">
+    <p>⚠️ 매칭된 성분이 없습니다.</p>
+</div>
+
+<table th:if="${matchedIngredients != null and !#lists.isEmpty(matchedIngredients)}">
+    <thead>
+        <tr>
+            <th>성분명</th>
+            <th>효능</th>
+            <th>주의사항</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="ingredient : ${matchedIngredients}">
+            <td th:text="${ingredient.name}"></td>
+            <td th:text="${ingredient.effect}"></td>
+            <td th:text="${ingredient.caution}"></td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- 다시 업로드 버튼 -->
+<p><a href="/ingredient/ocr">🔁 다시 업로드하기</a></p>
+
+</body>
+</html>

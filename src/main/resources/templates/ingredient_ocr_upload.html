@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>OCR 성분 업로드</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        form { margin-top: 20px; }
+        input[type="file"] { padding: 8px; }
+        button { padding: 8px 16px; margin-left: 10px; }
+        .error { color: red; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+<!-- ✅ 최신 문법 사용 -->
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<h2>📷 성분 라벨 이미지 업로드</h2>
+
+<!-- ✅ 에러 메시지 출력 가능 (있다면) -->
+<div th:if="${error}">
+    <p class="error" th:text="${error}"></p>
+</div>
+
+<form action="/ingredient/ocr" method="post" enctype="multipart/form-data">
+    <input type="file" name="image" accept="image/*" required>
+    <button type="submit">분석 시작</button>
+</form>
+
+</body>
+</html>
