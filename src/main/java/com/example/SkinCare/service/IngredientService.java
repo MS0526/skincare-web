@@ -34,7 +34,11 @@ public class IngredientService {
     public List<Ingredient> findByKeywordPartialMatch(List<String> keywords) {
         List<Ingredient> all = ingredientRepository.findAll();
         return all.stream()
-                .filter(ing -> keywords.stream().anyMatch(k -> ing.getName().equalsIgnoreCase(k)))
+                .filter(ing -> keywords.stream().anyMatch(k -> ing.getName().contains(k) || k.contains(ing.getName()) // 양방향
+                                                                                                                      // 부분
+                                                                                                                      // 포함
+                ))
+                .distinct()
                 .toList();
     }
 
