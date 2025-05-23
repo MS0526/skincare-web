@@ -3,25 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${title}"></title>
+    <title th:text="${title}">로그인</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Apple SD Gothic Neo', sans-serif;
+            background-color: #fff;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 480px;
+            padding: 2rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            border-radius: 16px;
+            background-color: white;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            margin-top: 1rem;
+            font-size: 1rem;
+            text-align: center;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .button.primary {
+            background-color: #3182f6;
+            color: white;
+        }
+
+        .button.primary:hover {
+            background-color: #2563eb;
+        }
+
+        .button.secondary {
+            background-color: #f1f3f5;
+            color: #333;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 600px;
+                padding: 3rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .button {
+                font-size: 1.1rem;
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div th:replace="~{fragments/nav :: nav}"></div> <!-- ✅ 네비게이션 삽입 -->
-    <!-- 로그인 상태에 따른 메시지 표시 -->
-    <h1>Welcome, <span th:text="${username}"></span>!</h1>
+<div class="container">
+    <h1>피부 케어 서비스에 오신 것을 환영합니다</h1>
 
-    <p>로그인 상태: 
-        <span th:text="${username} == 'Guest' ? 'Not logged in' : 'Logged in'"></span>
-    </p>
+    <p th:text="'안녕하세요, ' + ${username} + '님!'"></p>
 
     <div>
-        <!-- 로그인 상태에 따른 링크 표시 -->
-        <a th:href="${username == 'Guest' ? '/login' : '/logout'}" th:text="${username == 'Guest' ? 'Login' : 'Logout'}"></a>
-    </div>
+        <a th:href="@{(${username} == 'Guest') ? '/login' : '/logout'}"
+           th:text="(${username} == 'Guest') ? '로그인' : '로그아웃'"
+           class="button primary"></a>
 
-    <div>
-        <!-- 회원가입 링크 (로그인 하지 않은 상태에서만 보이도록) -->
-        <a th:href="${username == 'Guest' ? '/register' : '#'}" th:text="${username == 'Guest' ? 'Sign Up' : ''}"></a>
+        <a th:if="${username} == 'Guest'" th:href="@{/register}" class="button secondary">회원가입</a>
     </div>
+</div>
 </body>
 </html>

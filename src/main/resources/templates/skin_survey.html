@@ -1,28 +1,116 @@
-<!-- src/main/resources/templates/skin_survey.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>피부 타입 설문</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Apple SD Gothic Neo', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.6rem;
+        }
+
+        .question {
+            margin-bottom: 1.5rem;
+        }
+
+        .question p {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            padding: 0.6rem 1rem;
+            background-color: #f1f3f5;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        label:hover {
+            background-color: #e3e7ec;
+        }
+
+        input[type="radio"] {
+            margin-right: 0.6rem;
+        }
+
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            margin-top: 2rem;
+            background-color: #3182f6;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #2563eb;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
 </head>
 <body>
+<div class="container">
     <h2>피부 타입 설문</h2>
     <form action="/skin/diagnosis" method="post">
-        <p>세안 후 피부 상태는 어떤가요?</p>
-        <label><input type="radio" name="q1" value="dry"> 당김이 심하다</label><br>
-        <label><input type="radio" name="q1" value="oily"> 유분기가 많이 느껴진다</label><br>
-        <label><input type="radio" name="q1" value="normal"> 보통이다</label><br>
+        <div class="question">
+            <p>1. 세안 후 피부 상태는 어떤가요?</p>
+            <label><input type="radio" name="q1" value="dry"> 당김이 심하다</label>
+            <label><input type="radio" name="q1" value="oily"> 유분기가 많이 느껴진다</label>
+            <label><input type="radio" name="q1" value="normal"> 보통이다</label>
+        </div>
 
-        <p>T존(이마, 코) 부위는 어떤가요?</p>
-        <label><input type="radio" name="q2" value="oily"> 번들거린다</label><br>
-        <label><input type="radio" name="q2" value="dry"> 건조하다</label><br>
-        <label><input type="radio" name="q2" value="normal"> 보통이다</label><br>
+        <div class="question">
+            <p>2. T존(이마, 코) 부위는 어떤가요?</p>
+            <label><input type="radio" name="q2" value="oily"> 번들거린다</label>
+            <label><input type="radio" name="q2" value="dry"> 건조하다</label>
+            <label><input type="radio" name="q2" value="normal"> 보통이다</label>
+        </div>
 
-        <p>피부 트러블 빈도는?</p>
-        <label><input type="radio" name="q3" value="sensitive"> 자주 올라온다</label><br>
-        <label><input type="radio" name="q3" value="normal"> 거의 없다</label><br>
+        <div class="question">
+            <p>3. 피부 트러블 빈도는?</p>
+            <label><input type="radio" name="q3" value="sensitive"> 자주 올라온다</label>
+            <label><input type="radio" name="q3" value="normal"> 거의 없다</label>
+        </div>
 
-        <br>
         <button type="submit">제출</button>
     </form>
+</div>
 </body>
 </html>

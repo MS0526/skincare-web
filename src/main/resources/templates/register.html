@@ -1,13 +1,74 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Apple SD Gothic Neo', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+        }
+
+        ul {
+            margin-bottom: 1rem;
+            padding-left: 1.2rem;
+            color: red;
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background-color: #3182f6;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2563eb;
+        }
+    </style>
 </head>
 <body>
-    <div th:replace="~{fragments/nav :: nav}"></div>    <!-- ✅ 네비게이션 삽입 -->
+<div th:replace="~{fragments/nav :: nav}"></div>
+
+<div class="container">
     <h2>회원가입</h2>
 
-    <!-- 유효성 검사 오류 메시지 출력 -->
     <div th:if="${errors}">
         <ul>
             <li th:each="err : ${errors}" th:text="${err.defaultMessage}"></li>
@@ -15,13 +76,14 @@
     </div>
 
     <form action="/user/register" method="POST">
-        <label for="username">아이디:</label>
-        <input type="text" id="username" name="username" required><br><br>
+        <label for="username">아이디</label>
+        <input type="text" id="username" name="username" required>
 
-        <label for="password">비밀번호:</label>
-        <input type="password" id="password" name="password" required><br><br>
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" name="password" required>
 
         <button type="submit">회원가입</button>
     </form>
+</div>
 </body>
 </html>

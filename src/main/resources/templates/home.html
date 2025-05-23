@@ -1,22 +1,97 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>홈</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Apple SD Gothic Neo', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 2rem 1rem;
+        }
+
+        .greeting {
+            background-color: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .greeting h2 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .links {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .link-card {
+            background-color: white;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .link-card:hover {
+            background-color: #f1f3f5;
+        }
+
+        .logout-button {
+            margin-top: 2rem;
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .links {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div th:replace="~{fragments/nav :: nav}"></div>    <!-- ✅ 네비게이션 삽입 -->
-    <h2>환영합니다!</h2>
+<div th:replace="~{fragments/nav :: nav}"></div>
 
-    <p>
-        <span th:if="${username}">
-            로그인한 사용자: <strong th:text="${username}">유저이름</strong>
-        </span>
-        <a href="/mypage">마이페이지</a>
-    </p>
+<div class="container">
+    <div class="greeting">
+        <h2 th:text="'안녕하세요, ' + ${username} + '님 😊'"></h2>
+    </div>
 
+    <div class="links">
+        <a href="/mypage" class="link-card">마이페이지</a>
+        <a href="/skin/diagnosis" class="link-card">피부 진단</a>
+        <a href="/skin/recommend" class="link-card">제품 추천</a>
+        <a href="/routine" class="link-card">나의 루틴</a>
+        <a href="/ingredient/search" class="link-card">성분 검색</a>
+        <a href="/ingredient/ocr" class="link-card">성분 분석</a>
+    </div>
 
     <form th:action="@{/logout}" method="post">
-        <button type="submit">로그아웃</button>
+        <button type="submit" class="logout-button">로그아웃</button>
     </form>
+</div>
 </body>
 </html>
