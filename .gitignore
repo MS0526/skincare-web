@@ -1,33 +1,32 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# Build output
+/target/
+/build/
+/out/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# Sensitive configuration
+# 실제 비밀번호 등이 담긴 설정 파일은 제외합니다.
+application.properties
 
-### IntelliJ IDEA ###
-.idea
-*.iws
+# Log files
+*.log
+*.log.*
+
+# IDE configuration files
+.idea/
+.vscode/
 *.iml
 *.ipr
+*.iws
+.classpath
+.project
+.settings/
+.sts4-cache/
+.factorypath
+.springBeans
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# Maven Wrapper
+# Maven을 설치하지 않아도 빌드할 수 있게 돕는 파일은 포함시킵니다.
+!.mvn/wrapper/maven-wrapper.jar
 
-### VS Code ###
-.vscode/
+# Spring Initializr generated files
+HELP.md
