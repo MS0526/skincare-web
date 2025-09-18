@@ -37,7 +37,8 @@ public class IngredientOcrController {
     public String handleOcrUpload(@RequestParam("image") MultipartFile file, Model model) {
         try {
             String text = ocrService.extractTextFromImage(file);
-            System.out.println("🔍 OCR 결과 텍스트:\n" + text);
+            // System.out.println("🔍 OCR 결과 텍스트:\n" + text);
+            // 로그 제거
 
             model.addAttribute("extractedText", text);
 
@@ -62,7 +63,7 @@ public class IngredientOcrController {
                 }
             }
 
-            System.out.println("🧾 n-gram 기반 성분 키워드 후보: " + keywords);
+            // System.out.println("🧾 n-gram 기반 성분 키워드 후보: " + keywords);
 
             // 🔁 IngredientService를 통해 매칭
             List<Ingredient> matched = ingredientService.findByKeywordPartialMatch(new ArrayList<>(keywords));
