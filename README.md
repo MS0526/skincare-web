@@ -94,7 +94,7 @@ macOS / Linux: export DB_PASSWORD="your_password"
 
 ./gradlew bootRun
 # 또는 Maven인 경우
-# ./mvnw spring-boot:run
+ ./mvnw spring-boot:run
 
 실행 후 웹 브라우저에서 http://localhost:8080으로 접속하여 확인합니다.
 
